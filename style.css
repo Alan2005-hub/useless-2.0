@@ -1,0 +1,1064 @@
+/* ======================================================
+   OBSERVE — HUMAN ATTENTION EXPERIMENT
+   ====================================================== */
+
+
+/* ======================================================
+   RESET
+   ====================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ======================================================
+   BODY
+   ====================================================== */
+
+body {
+    background: #090a0b;
+    color: #e8e8e8;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+
+.header {
+    height: 90px;
+
+    border-bottom: 1px solid #222;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 6%;
+}
+
+
+/* BRAND */
+
+.brand h1 {
+    font-size: 24px;
+
+    letter-spacing: 6px;
+
+    font-weight: 500;
+}
+
+.brand p {
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #777;
+
+    margin-top: 5px;
+}
+
+
+/* NAVIGATION */
+
+nav {
+    display: flex;
+
+    gap: 35px;
+}
+
+nav span {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: #666;
+}
+
+
+/* ======================================================
+   MAIN
+   ====================================================== */
+
+main {
+    width: 88%;
+
+    max-width: 1300px;
+
+    margin: auto;
+}
+
+
+/* ======================================================
+   INTRO
+   ====================================================== */
+
+.intro {
+    padding-top: 75px;
+}
+
+
+.experiment-label {
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    color: #777;
+
+    margin-bottom: 20px;
+}
+
+
+.intro h2 {
+    font-size:
+        clamp(
+            55px,
+            8vw,
+            115px
+        );
+
+    line-height: .88;
+
+    font-weight: 300;
+
+    letter-spacing: -5px;
+}
+
+
+.intro-text {
+    margin-top: 30px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* ======================================================
+   STATS
+   ====================================================== */
+
+.stats {
+    display: flex;
+
+    gap: 70px;
+
+    border-top: 1px solid #222;
+
+    border-bottom: 1px solid #222;
+
+    margin-top: 55px;
+
+    padding: 20px 0;
+}
+
+
+.stat {
+    min-width: 150px;
+}
+
+
+.stat span {
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #666;
+
+    margin-bottom: 8px;
+}
+
+
+.stat strong {
+    font-size: 20px;
+
+    font-weight: 400;
+}
+
+
+/* ======================================================
+   EYE SECTION
+   ====================================================== */
+
+.eye-section {
+    position: relative;
+
+    min-height: 390px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* EYES CONTAINER */
+
+.eyes {
+    display: flex;
+
+    gap: 35px;
+
+    width:
+        min(
+            900px,
+            90vw
+        );
+}
+
+
+/* INDIVIDUAL SVG EYE */
+
+.eye {
+    width: 50%;
+
+    height: auto;
+
+    overflow: visible;
+}
+
+
+/* ======================================================
+   EYE WHITE / SCLERA
+   ====================================================== */
+
+.sclera {
+    fill: #eeeeee;
+
+    stroke: #777;
+
+    stroke-width: 2;
+
+    transition:
+        fill 5s ease;
+}
+
+
+/* ======================================================
+   IRIS
+   ====================================================== */
+
+.iris-group {
+
+    /*
+       This is important for pupil/iris
+       movement.
+    */
+
+    transform-origin:
+        150px 90px;
+
+    transition:
+        transform .08s linear;
+}
+
+
+.iris {
+    transition:
+        fill 5s ease;
+}
+
+
+.iris-detail {
+    fill: none;
+
+    stroke: #777;
+
+    stroke-width: 2;
+
+    opacity: .6;
+}
+
+
+/* PUPIL */
+
+.pupil {
+    fill: #050505;
+}
+
+
+/* EYE HIGHLIGHT */
+
+.highlight {
+    fill: white;
+
+    opacity: .8;
+}
+
+
+/* ======================================================
+   EYELASHES
+   ====================================================== */
+
+.lashes {
+    fill: none;
+
+    stroke: #111;
+
+    stroke-width: 7;
+
+    stroke-linecap: round;
+}
+
+
+/* ======================================================
+   RED EYE VEINS
+   ====================================================== */
+
+.veins {
+
+    /*
+       Starts invisible.
+       JavaScript increases this
+       as the timer progresses.
+    */
+
+    opacity: 0;
+
+    transition:
+        opacity 2s ease;
+}
+
+
+.veins path {
+
+    fill: none;
+
+    stroke: #d51f1f;
+
+    stroke-width: 3;
+
+    stroke-linecap: round;
+
+    transition:
+        stroke-width 2s ease;
+}
+
+
+/* ======================================================
+   TEARS
+   ====================================================== */
+
+.tear {
+
+    position: absolute;
+
+    width: 8px;
+
+    height: 15px;
+
+    background: #8fd8ff;
+
+    border-radius:
+        50%
+        50%
+        55%
+        55%;
+
+    opacity: 0;
+
+    transform:
+        translateY(0);
+}
+
+
+/* LEFT TEAR */
+
+.tear-left {
+
+    left:
+        calc(
+            50% - 175px
+        );
+
+    top: 61%;
+}
+
+
+/* RIGHT TEAR */
+
+.tear-right {
+
+    right:
+        calc(
+            50% - 175px
+        );
+
+    top: 61%;
+}
+
+
+/* ACTIVE TEARS */
+
+.tear.active {
+
+    opacity: .8;
+
+    animation:
+        tearDrop
+        2.5s
+        infinite
+        ease-in;
+}
+
+
+/* TEAR ANIMATION */
+
+@keyframes tearDrop {
+
+    0% {
+
+        transform:
+            translateY(0);
+
+        opacity: .8;
+
+    }
+
+
+    70% {
+
+        opacity: .7;
+
+    }
+
+
+    100% {
+
+        transform:
+            translateY(65px);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* ======================================================
+   SYSTEM STATUS
+   ====================================================== */
+
+.system {
+
+    border-top: 1px solid #222;
+
+    border-bottom: 1px solid #222;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    padding: 25px 0;
+}
+
+
+/* SYSTEM LABELS */
+
+.system-status > span,
+.condition > span {
+
+    display: block;
+
+    color: #666;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+
+/* STATUS ROW */
+
+.status-row {
+
+    font-size: 10px;
+
+    color: #888;
+
+    margin: 8px 0;
+
+    letter-spacing: 1px;
+}
+
+
+/* STATUS DOT */
+
+.status-row i {
+
+    display: inline-block;
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #333;
+
+    margin-right: 10px;
+}
+
+
+/* ACTIVE STATUS */
+
+.status-row i.active {
+
+    background: #65dba0;
+
+    box-shadow:
+        0 0 8px #65dba0;
+}
+
+
+/* ======================================================
+   EYE CONDITION
+   ====================================================== */
+
+.condition {
+
+    width: 280px;
+}
+
+
+.condition strong {
+
+    display: block;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    color: #65dba0;
+
+    margin-bottom: 12px;
+
+    transition:
+        color 1s ease;
+}
+
+
+/* CONDITION BAR */
+
+.condition-bar {
+
+    width: 100%;
+
+    height: 3px;
+
+    background: #222;
+}
+
+
+/* CONDITION PROGRESS */
+
+#conditionBar {
+
+    width: 5%;
+
+    height: 100%;
+
+    background: #65dba0;
+
+    transition:
+        width 1.5s ease,
+        background 1.5s ease;
+}
+
+
+/* ======================================================
+   BOTTOM
+   ====================================================== */
+
+.bottom {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    padding:
+        25px 0 50px;
+
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ======================================================
+   START SCREEN
+   ====================================================== */
+
+.start-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: #070809;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.start-content {
+
+    text-align: center;
+}
+
+
+/* START LABEL */
+
+.start-content > span {
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+}
+
+
+/* READY TEXT */
+
+.start-content h2 {
+
+    font-size: 70px;
+
+    line-height: .9;
+
+    font-weight: 300;
+
+    margin: 25px 0;
+}
+
+
+/* DESCRIPTION */
+
+.start-content p {
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+
+/* ======================================================
+   BUTTONS
+   ====================================================== */
+
+.start-content button,
+.final-content button {
+
+    background: transparent;
+
+    color: white;
+
+    border: 1px solid #555;
+
+    padding:
+        15px 28px;
+
+    letter-spacing: 2px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    transition:
+        .3s;
+}
+
+
+.start-content button:hover,
+.final-content button:hover {
+
+    background: white;
+
+    color: black;
+}
+
+
+.start-content button:disabled {
+
+    opacity: .5;
+
+    cursor:
+        not-allowed;
+}
+
+
+/* CAMERA ACCESS TEXT */
+
+.start-content small {
+
+    display: block;
+
+    margin-top: 18px;
+
+    color: #444;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ======================================================
+   FINAL SCREEN
+   ====================================================== */
+
+.final {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(
+            5,
+            6,
+            7,
+            .98
+        );
+
+    z-index: 200;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    overflow-y: auto;
+
+    padding: 30px 0;
+}
+
+
+/* SHOW FINAL SCREEN */
+
+.final.show {
+
+    display: flex;
+}
+
+
+/* FINAL CONTENT */
+
+.final-content {
+
+    width: 90%;
+
+    max-width: 900px;
+
+    margin: auto;
+}
+
+
+/* FINAL SMALL LABEL */
+
+.final-content > span {
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+}
+
+
+/* FINAL TITLE */
+
+.final-content h2 {
+
+    font-size:
+        clamp(
+            40px,
+            7vw,
+            80px
+        );
+
+    line-height: .95;
+
+    font-weight: 300;
+
+    margin: 25px 0;
+}
+
+
+/* ======================================================
+   FINAL MESSAGE
+   ====================================================== */
+
+#finalMessage {
+
+    /*
+       Larger than the original version
+       so the user is forced to read it.
+    */
+
+    font-size: 22px;
+
+    line-height: 1.7;
+
+    color: #eeeeee;
+
+    max-width: 900px;
+
+    margin:
+        20px auto 25px;
+
+    letter-spacing: .3px;
+}
+
+
+/* IMPORTANT WORDS */
+
+#finalMessage strong {
+
+    font-size: 30px;
+
+    font-weight: 600;
+}
+
+
+/* ======================================================
+   FINAL IMAGE
+   ====================================================== */
+
+.final-image {
+
+    display: block;
+
+    width:
+        min(
+            420px,
+            60vw
+        );
+
+    max-height: 32vh;
+
+    height: auto;
+
+    object-fit: contain;
+
+    margin:
+        15px auto;
+
+    border:
+        1px solid #333;
+
+    box-shadow:
+        0 0 35px
+        rgba(
+            255,
+            0,
+            0,
+            .12
+        );
+}
+
+
+/* ======================================================
+   WEBCAM
+   ====================================================== */
+
+#webcam {
+
+    position: fixed;
+
+    width: 1px;
+
+    height: 1px;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
+
+@media (max-width: 700px) {
+
+
+    /* HEADER */
+
+    .header {
+
+        padding:
+            0 5%;
+    }
+
+
+    nav {
+
+        display: none;
+    }
+
+
+    /* MAIN */
+
+    main {
+
+        width: 90%;
+    }
+
+
+    /* INTRO */
+
+    .intro {
+
+        padding-top: 50px;
+    }
+
+
+    .intro h2 {
+
+        font-size: 55px;
+
+        letter-spacing: -3px;
+    }
+
+
+    /* STATS */
+
+    .stats {
+
+        gap: 20px;
+
+        justify-content:
+            space-between;
+    }
+
+
+    .stat {
+
+        min-width: 0;
+    }
+
+
+    .stat span {
+
+        font-size: 7px;
+    }
+
+
+    .stat strong {
+
+        font-size: 16px;
+    }
+
+
+    /* EYES */
+
+    .eyes {
+
+        gap: 10px;
+    }
+
+
+    .eye-section {
+
+        min-height: 280px;
+    }
+
+
+    /* SYSTEM */
+
+    .system {
+
+        gap: 30px;
+    }
+
+
+    .condition {
+
+        width: 160px;
+    }
+
+
+    /* BOTTOM */
+
+    .bottom {
+
+        gap: 20px;
+    }
+
+
+    /* START */
+
+    .start-content h2 {
+
+        font-size: 55px;
+    }
+
+
+    /* FINAL IMAGE */
+
+    .final-image {
+
+        width:
+            min(
+                350px,
+                80vw
+            );
+
+        max-height: 30vh;
+    }
+
+
+    /* FINAL MESSAGE */
+
+    #finalMessage {
+
+        font-size: 17px;
+
+        line-height: 1.6;
+    }
+
+
+    #finalMessage strong {
+
+        font-size: 23px;
+    }
+
+}
